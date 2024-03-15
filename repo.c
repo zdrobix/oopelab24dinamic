@@ -1,0 +1,85 @@
+#include <stdlib.h>
+#include <string.h>
+#include "repo.h"
+
+ListaCheltuieli creazaVid() {
+
+    ListaCheltuieli listaCreata;
+
+    listaCreata.lg = 0;
+
+    listaCreata.cp = 50;
+
+    listaCreata.cht = (Cheltuiala*)malloc(listaCreata.cp * sizeof(Cheltuiala));
+
+    return listaCreata;
+}
+
+void distrugeLista(ListaCheltuieli* list) {
+
+    if (list == NULL) return;
+
+    for (int i = 0; i < list->lg; i++) {
+
+        Cheltuiala cht2 = get(list, i);
+
+        eliminaCh(&cht2);
+    }
+    list->lg = 0;
+
+    free(list->cht);
+}
+
+void redim_list(ListaCheltuieli* list) {
+
+    Cheltuiala *cht_nou = (Cheltuiala*)malloc(2* list->cp * sizeof (Cheltuiala));
+
+    if (cht_nou == NULL) return;
+
+    for ( int i = 0 ; i < list->lg; i ++ )
+
+        cht_nou[i] = list->cht[i];
+
+    list->cp = 2 * list->cp;
+
+    free(list->cht);
+
+    list->cht = cht_nou;
+
+}
+
+void adaugaCh(ListaCheltuieli* list, Cheltuiala cht) {
+
+    if (list->lg == list->cp)
+
+        redim_list(list);
+
+    list->cht[list->lg] = cht;
+
+    list->lg++;
+}
+
+void modificareCh (ListaCheltuieli* list, int pozitie, int zi_n, float suma_n, char* tip_n) {
+
+    list->cht[pozitie].zi = zi_n;
+
+    list->cht[pozitie].suma = suma_n;
+
+    strcpy(list->cht[pozitie].tip, tip_n);
+}
+
+void stergeCh(ListaCheltuieli* list, int pozitie) {
+
+    int i;
+
+    for ( i = pozitie + 1; i < list->lg; i ++ )
+
+        list->cht[i - 1] = list->cht[i];
+
+    list->lg --;
+}
+
+Cheltuiala get(ListaCheltuieli* list, int poz) {
+
+    return list->cht[poz];
+}
