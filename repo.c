@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "repo.h"
+#include "cheltuiala.h"
 
 ListaCheltuieli creazaVid() {
 
@@ -75,4 +76,6 @@ void stergeCh(ListaCheltuieli* list, int pozitie) {
         list->cht[i - 1] = list->cht[i];
 
     list->lg --;
+
+    eliminaCh(&(list->cht[pozitie]));
 }

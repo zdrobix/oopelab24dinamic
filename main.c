@@ -26,11 +26,11 @@ void introducere_date ( int* zi, float* suma, char tip[100]) {
     int zi_noua; float suma_noua; char tip_nou[100];
     printf("Introduceti ziua: ");
 
-    scanf_s("%d", &zi_noua);
+    scanf("%d", &zi_noua);
 
     printf("Introduceti suma: ");
 
-    scanf_s("%f", &suma_noua);
+    scanf("%f", &suma_noua);
 
     printf("Introduceti tipul: ");
 
@@ -100,7 +100,7 @@ void meniu_modificare(ListaCheltuieli* list) {
 
     int numar_ch;
 
-    scanf_s("%d", &numar_ch);
+    scanf("%d", &numar_ch);
 
     numar_ch--; // pentru ca indexarea incepe de la 0, iar utilizatorul vede indexul adevarat + 1
 
@@ -142,7 +142,7 @@ void meniu_stergere(ListaCheltuieli* list) {
 
     int numar_ch;
 
-    scanf_s("%d", &numar_ch);
+    scanf("%d", &numar_ch);
 
     numar_ch--; // pentru ca indexarea incepe de la 0, iar utilizatorul vede indexul adevarat + 1
 
@@ -189,13 +189,13 @@ void meniu_filtrare (ListaCheltuieli* list) {
 
         printf("Introduceti ziua: ");
 
-        scanf_s("%d", &zi);
+        scanf("%d", &zi);
 
     } else if (optiune == '2') {
 
         printf("Introduceti suma: ");
 
-        scanf_s("%f", &suma);
+        scanf("%f", &suma);
 
     } else if (optiune == '3') {
 
@@ -285,13 +285,13 @@ void meniu_ordonare(ListaCheltuieli* list) {
 
         printf("Lista ordonata dupa zi este: \n");
 
-        sorteazaCh(&lista_ordonata, directie, 1, 0);
+        sorteazaCh(&lista_ordonata, directie, 1);
 
     } else {
 
         printf("Lista ordonata dupa suma este: \n");
 
-        sorteazaCh(&lista_ordonata, directie, 0, 1);
+        sorteazaCh(&lista_ordonata, directie, 0);
 
     }
     tiparesteListaCh(&lista_ordonata);

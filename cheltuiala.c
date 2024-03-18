@@ -47,5 +47,5 @@ void eliminaCh(Cheltuiala *cht) {
 
     free(cht->tip);
 
-    cht -> tip = NULL;
+    free(cht);
 }
