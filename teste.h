@@ -24,4 +24,8 @@ void test_distruge();
 
 void prestabilit_cheltuieli(ListaCheltuieli* list);
 
+void test_redimensionare();
+
+void runTest();
+
 #endif //TESTE_H

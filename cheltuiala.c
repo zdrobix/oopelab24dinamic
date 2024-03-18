@@ -4,21 +4,22 @@
 #include "cheltuiala.h"
 
 
-Cheltuiala creeazaCh(int zi, float suma, char *tip) {
+Cheltuiala* creeazaCh(int zi, float suma, const char* tip) {
 
-    Cheltuiala chtl;
+    Cheltuiala* chtl = malloc(sizeof(Cheltuiala));
 
     int nrT = (int)strlen(tip) + 1;
 
-    chtl.tip = malloc(nrT * sizeof (char));
+    chtl->tip = malloc(nrT * sizeof (char));
 
-    strcpy(chtl.tip, tip);
+    strcpy(chtl->tip, tip);
 
-    chtl.zi = zi;
+    chtl->zi = zi;
 
-    chtl.suma = suma;
+    chtl->suma = suma;
 
     return chtl;
+
 }
 
 int validareCh(Cheltuiala cht) {

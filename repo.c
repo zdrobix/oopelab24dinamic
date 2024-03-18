@@ -21,9 +21,7 @@ void distrugeLista(ListaCheltuieli* list) {
 
     for (int i = 0; i < list->lg; i++) {
 
-        Cheltuiala cht2 = get(list, i);
-
-        eliminaCh(&cht2);
+        eliminaCh(&(list->cht[i]));
     }
     list->lg = 0;
 
@@ -48,18 +46,18 @@ void redim_list(ListaCheltuieli* list) {
 
 }
 
-void adaugaCh(ListaCheltuieli* list, Cheltuiala cht) {
+void adaugaCh(ListaCheltuieli* list, Cheltuiala* cht) {
 
     if (list->lg == list->cp)
 
         redim_list(list);
 
-    list->cht[list->lg] = cht;
+    list->cht[list->lg] = *cht;
 
     list->lg++;
 }
 
-void modificareCh (ListaCheltuieli* list, int pozitie, int zi_n, float suma_n, char* tip_n) {
+void modificareCh (ListaCheltuieli* list, int pozitie, int zi_n, float suma_n, const char* tip_n) {
 
     list->cht[pozitie].zi = zi_n;
 
@@ -77,9 +75,4 @@ void stergeCh(ListaCheltuieli* list, int pozitie) {
         list->cht[i - 1] = list->cht[i];
 
     list->lg --;
-}
-
-Cheltuiala get(ListaCheltuieli* list, int poz) {
-
-    return list->cht[poz];
 }

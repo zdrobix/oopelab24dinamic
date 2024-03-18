@@ -3,28 +3,34 @@
 #include "service.h"
 #include <string.h>
 
-int adaugare_cheltuiala(ListaCheltuieli* list, int zi, float suma, char *tip) {
+int adaugare_cheltuiala(ListaCheltuieli* list, int zi, float suma, const char* tip) {
 
-    Cheltuiala cht = creeazaCh(zi, suma, tip);
+    Cheltuiala* cht = creeazaCh(zi, suma, tip);
 
-    if (validareCh(cht) == 0 ) {
+    if (validareCh(*cht) == 0 ) {
 
-        eliminaCh(&cht);
+        eliminaCh(cht);
 
         return 0;
     }
     adaugaCh(list, cht);
 
+    //eliminaCh(cht);
+
     return 1;
 }
 
-int modificare_cheltuiala(ListaCheltuieli* list, int pozitie, int zi, float suma, char *tip) {
+int modificare_cheltuiala(ListaCheltuieli* list, int pozitie, int zi, float suma, const char* tip) {
 
-    Cheltuiala cht = creeazaCh(zi, suma, tip);
+    if (pozitie < 0 || pozitie >= list->lg)
 
-    if (validareCh(cht) == 0 ) {
+        return 0;
 
-        eliminaCh(&cht);
+    Cheltuiala* cht = creeazaCh(zi, suma, tip);
+
+    if (validareCh(*cht) == 0 ) {
+
+        eliminaCh(cht);
 
         return 0;
     }
@@ -44,7 +50,7 @@ int sterge_cheltuiala(ListaCheltuieli* list, int pozitie) {
     return 1;
 }
 
-ListaCheltuieli* filtrareCh( ListaCheltuieli* list, ListaCheltuieli* lista_filtrata , int zi, float suma, char* tip) {
+ListaCheltuieli* filtrareCh( ListaCheltuieli* list, ListaCheltuieli* lista_filtrata , int zi, float suma, const char* tip) {
 
     int i;
 
@@ -55,7 +61,7 @@ ListaCheltuieli* filtrareCh( ListaCheltuieli* list, ListaCheltuieli* lista_filtr
 
             if ( strcmp(list->cht[i].tip, tip) == 0)
 
-                adaugaCh(lista_filtrata, list->cht[i]);
+                adaugaCh(lista_filtrata, &(list->cht[i]));
 
 
     ///filtrare dupa suma
@@ -65,7 +71,7 @@ ListaCheltuieli* filtrareCh( ListaCheltuieli* list, ListaCheltuieli* lista_filtr
 
             if ( suma == list->cht[i].suma)
 
-                adaugaCh(lista_filtrata, list->cht[i]);
+                adaugaCh(lista_filtrata, &(list->cht[i]));
 
     ///filtrare dupa zi
     if ( suma == -1 && strcmp(tip, "") == 0 )
@@ -74,21 +80,30 @@ ListaCheltuieli* filtrareCh( ListaCheltuieli* list, ListaCheltuieli* lista_filtr
 
             if ( zi== list->cht[i].zi)
 
-                adaugaCh(lista_filtrata, list->cht[i]);
+                adaugaCh(lista_filtrata, &(list->cht[i]));
 
     return lista_filtrata;
 }
 
-float comparaCh(Cheltuiala cht1,Cheltuiala cht2, int zi, float suma) {
+int comparaChZi(Cheltuiala cht1,Cheltuiala cht2) {
 
-    if (zi == 1)
+    if (cht1.zi < cht2 ) return -1;
 
-        return cht1.zi - cht2.zi;
+    if (cht1.zi == cht2.zi ) return 0;
 
-    return cht1.suma - cht2.suma;
+    return 1;
 }
 
-void sorteazaCh(ListaCheltuieli* list, int directie, int zi, float suma) {
+int comparaChSuma(Cheltuiala cht1,Cheltuiala cht2) {
+
+    if (cht1.suma < cht2 ) return -1;
+
+    if (cht1.suma == cht2.suma ) return 0;
+
+    return 1;
+}
+
+void sorteazaCh(ListaCheltuieli* list, int directie, int(*comparaCh)(Cheltuiala cht1, Cheltuiala cht2)) {
 
     int i, j;
 
@@ -100,7 +115,8 @@ void sorteazaCh(ListaCheltuieli* list, int directie, int zi, float suma) {
 
             Cheltuiala cht2 = list->cht[j];
 
-            if ( (-1.0) * directie * comparaCh(cht1, cht2, zi, suma) > 0 )
+           // if ( (-1.0) * directie * comparaCh(cht1, cht2, zi, suma) > 0 )
+           if ( (comparaCh(cht1, cht2) * (-1.0) * directia ))
             {
                 Cheltuiala aux = list->cht[i];
 

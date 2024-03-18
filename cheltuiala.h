@@ -7,12 +7,12 @@ typedef struct {
 
     float suma;
 
-    char *tip;
+    char* tip;
 
 }Cheltuiala;
     ///Cheltuiala care contine zi, suma, si tip
 
-Cheltuiala creeazaCh(int zi, float suma, char *tip);
+Cheltuiala* creeazaCh(int zi, float suma, const char *tip);
     ///creeaza o cheltuiala, prin parametrii zi, suma, si tip
     ///returneaza cheltuiala
     ///o cheltuiala este creata doar daca este validata
