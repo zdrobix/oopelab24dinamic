@@ -5,18 +5,16 @@
 
 int adaugare_cheltuiala(ListaCheltuieli* list, int zi, float suma, const char* tip) {
 
-    Cheltuiala* cht = creeazaCh(zi, suma, tip);
-
-    if (cht == NULL || list == NULL)
+    if (list == NULL)
 
         return 0;
 
-    if (validareCh(*cht) == 0 ) {
+    if (validareCh(zi, suma, tip) == 0 ) {
 
-        eliminaCh(cht);
+    	return 0;
+	}
+	Cheltuiala* cht = creeazaCh(zi, suma, tip);
 
-        return 0;
-    }
     adaugaCh(list, cht);
 
     return 1;
@@ -28,14 +26,10 @@ int modificare_cheltuiala(ListaCheltuieli* list, int pozitie, int zi, float suma
 
         return 0;
 
-    Cheltuiala* cht = creeazaCh(zi, suma, tip);
-
-    if (validareCh(*cht) == 0 ) {
-
-        eliminaCh(cht);
+    if (validareCh(zi, suma, tip) == 0 )
 
         return 0;
-    }
+
     modificareCh(list, pozitie, zi, suma, tip);
 
     return 1;

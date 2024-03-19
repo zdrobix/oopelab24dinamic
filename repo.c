@@ -22,7 +22,7 @@ void distrugeLista(ListaCheltuieli* list) {
 
     for (int i = 0; i < list->lg; i++) {
 
-        eliminaCh(&(list->cht[i]));
+        eliminaCh(&list->cht[i]);
     }
     list->lg = 0;
 

@@ -17,7 +17,7 @@ Cheltuiala* creeazaCh(int zi, float suma, const char *tip);
 ///returneaza cheltuiala
 ///o cheltuiala este creata doar daca este validata
 
-int validareCh(Cheltuiala cht);
+int validareCh(int zi, float suma, const char *tip);
 ///Valideaza datele cheltuielii inainte de a fi adaugata in lista.
 ///se returneaza 1 sau 0. 0 - invalid. 1 - valid
 

@@ -22,17 +22,17 @@ Cheltuiala* creeazaCh(int zi, float suma, const char* tip) {
 
 }
 
-int validareCh(Cheltuiala cht) {
+int validareCh(int zi, float suma, const char *tip) {
 
-    if ( cht.zi <= 0 || cht.zi > 31  )
-
-        return 0;
-
-    if ( cht.suma <= 0 )
+    if ( zi <= 0 || zi > 31  )
 
         return 0;
 
-    if ( strcmp(cht.tip, "") == 0 )
+    if ( suma <= 0 )
+
+        return 0;
+
+    if ( strcmp(tip, "") == 0 )
 
         return 0;
 
